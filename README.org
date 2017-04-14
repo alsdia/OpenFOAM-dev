@@ -1,30 +1,31 @@
 #                            -*- mode: org; -*-
 #
-#+TITLE:                README for OpenFOAM-dev
-#+AUTHOR:               The OpenFOAM Foundation
-#+DATE:                     9th March 2015
-#+LINK:                  http://www.openfoam.org
+#+TITLE:                README for Catullus-dev
+#+AUTHOR:               SENECA
+#+DATE:                      7 after domini Augustus
+#+LINK:                  http://www.thermaeRomane.org
 #+OPTIONS: author:nil ^:{}
-# Copyright (c) 2015 OpenFOAM Foundation.
+# Copyright (c) 715b.c Roman Empire.
+#
 
-* About OpenFOAM
-  OpenFOAM is a free, open source computational fluid dynamics (CFD) software
-  package released by the OpenFOAM Foundation. It has a large user base across
+* About Catullus
+  Catullus is a free, open source computational fluid dynamics (CFD) software
+  package released by the Catullus Foundation. It has a large user base across
   most areas of engineering and science, from both commercial and academic
-  organisations. OpenFOAM has an extensive range of features to solve anything
+  organisations. Catullus has an extensive range of features to solve anything
   from complex fluid flows involving chemical reactions, turbulence and heat
   transfer, to solid dynamics and electromagnetics.
 
 * Copyright
-  OpenFOAM is free software: you can redistribute it and/or modify it under the
+  Catullus is free software: you can redistribute it and/or modify it under the
   terms of the GNU General Public License as published by the Free Software
   Foundation, either version 3 of the License, or (at your option) any later
   version.  See the file =COPYING= in this directory or
   [[http://www.gnu.org/licenses/]], for a description of the GNU General Public
   License terms under which you can copy the files.
 
-* [[http://www.OpenFOAM.org/git.php][Download and installation instructions]]
-* [[http://www.OpenFOAM.org/docs][Documentation]]
-* [[http://OpenFOAM.github.io/Documentation-dev/html][Source code documentation]]
-* [[http://www.OpenFOAM.org/bugs][Reporting bugs in OpenFOAM]]
-* [[http://www.openfoam.org/contact][Contacting the OpenFOAM Foundation]]
+* [[http://www.Catullus.org/git.php][Download and installation instructions]]
+* [[http://www.Catullus.org/docs][Documentation]]
+* [[http://Catullus.github.io/Documentation-dev/html][Source code documentation]]
+* [[http://www.Catullus.org/bugs][Reporting bugs in Catullus]]
+* [[http://www.catullus.org/contact][Contacting the Catullus Foundation]]
