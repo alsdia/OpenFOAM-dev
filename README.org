@@ -5,7 +5,7 @@
 #+DATE:                      7 after domini Augustus
 #+LINK:                  http://www.thermaeRomane.org
 #+OPTIONS: author:nil ^:{}
-# Copyright (c) 715b.c Roman Empire.
+# Copyright (c) 716b.c Roman Empire.
 #
 
 * About Catullus
