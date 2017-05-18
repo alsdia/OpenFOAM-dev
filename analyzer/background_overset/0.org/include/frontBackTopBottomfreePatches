@@ -1,0 +1,34 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+topAndBottom
+{
+    type symmetry;
+}
+
+frontAndBack
+{
+    type symmetry ;
+}
+
+frontAndBack1
+{
+    type symmetry ;
+}
+
+frontAndBack2
+{
+    type symmetry ;
+}
+
+free
+{
+   type overset;
+}
+
+// ************************************************************************* //

@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs            ("liboverset.so");
+
+application     overPimpleDyMFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime     33.472;  // 10 full rotations
+
+deltaT          0.00005;
+
+//writeControl    timeStep;
+
+//writeInterval   2;
+
+
+//writeControl    adjustableRunTime;
+writeControl    timeStep;
+// for test
+//writeInterval 5.0e-05;
+// for final release
+writeInterval   2;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  10;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           1;
+
+functions
+{
+	forceCoeffs
+	{
+		type        forceCoeffs;
+
+		functionObjectLibs ( "libforces.so" );
+
+		outputControl   timeStep;
+		timeInterval    1;
+
+		log         yes;
+
+		patches     ( walls );
+		rhoName     rhoInf;   // Indicates incompressible
+		rhoInf      1.225;    // Redundant for incompressible
+		liftDir     (0 1 0);
+		dragDir     (1 0 0);
+		CofR        (0 0 0);  // Center of rotation of the oscillating mesh
+		pitchAxis   (0 0 1);  // periodic rotation around the z axis
+		magUInf     10;
+		lRef        0.247;    //  [from 「風洞実験による着氷雪送電線の定常および非定常空気力特性に関する研究」 table 1 pag 246 B(mm) = 247
+		Aref        0.009386; // 0.247 * 0.038 = [from 「風洞実験による着氷雪送電線の定常および非定常空気力特性に関する研究」 fig2(a) pag 246 38mm]
+	}
+
+       probes
+    {
+        type            probes;
+        functionObjectLibs ("libsampling.so");
+        enabled         true;
+        outputControl   timeStep;
+        outputInterval  1;
+        probeLocations
+        ( (0.0 0.0 0.03 ));
+        fields
+        (p  U);
+    }    
+	
+}
+
+
+
+// ************************************************************************* //

@@ -1,0 +1,11 @@
+#!/usr/bin/gnuplot -persist
+
+## set logscale y
+set title "proveMoniter"
+set ylabel 'Temperature'
+set xlabel 'Iteration'
+
+plot "< sed 's/(/ /g' postProcessing/probes/0/U | sed 's/)/ /g' | awk '{print  sqrt($2*$2+$3*$3+$4*$4)}' " title 'Umag' with lines
+
+pause 1
+reread 

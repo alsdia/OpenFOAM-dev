@@ -1,0 +1,271 @@
+/*--------------------------------*- C++ -*---------------------------------*\
+| =========                |                                                |
+| \      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \    /   O peration     | Version:  2.3.0                                 |
+|   \  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \/     M anipulation  |                                                 |
+\*--------------------------------------------------------------------------*/
+
+
+FoamFile
+{
+    version         2.3;
+    format          ascii;
+    class           dictionary;
+    object          turbulenceProperties;
+    location        "constant";
+}
+
+//simulationType RAS;
+// for OF+
+//simulationType LES;
+simulationType LES;
+
+// for OF24
+//simulationType LESModel;
+
+RAS
+{
+//    RASModel          kEpsilon;
+    RASModel            realizableKE;
+//    RASModel            v2f;
+//    RASModel            SpalartAllmaras;
+    turbulence          off; //on;
+    printCoeffs         on;
+}
+
+
+LES
+{
+    LESModel    Smagorinsky;
+
+
+    homogeneousDynSmagorinskyCoeffs
+    {
+    filter simple;
+    ce 1.05;
+    }
+
+
+    SmagorinskyCoeffs
+    {
+	ck              0.07;
+	ce              1.05;
+    }
+
+
+    turbulence      on;
+
+    printCoeffs     on;
+
+    // delta           vanDriest;  // for fine mesh
+    // delta cubeRootVol; 
+
+    delta smooth;  // to increase stability with a coarse mesh, friction velocity can become underpredicted
+
+    cubeRootVolCoeffs
+    {
+        deltaCoeff      1;
+    }
+
+    PrandtlCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        smoothCoeffs
+        {
+            delta           cubeRootVol;
+            cubeRootVolCoeffs
+            {
+                deltaCoeff      1;
+            }
+
+            maxDeltaRatio   1.1;
+        }
+
+        Cdelta          0.158;
+    }
+
+    vanDriestCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        smoothCoeffs
+        {
+            delta           cubeRootVol;
+            cubeRootVolCoeffs
+            {
+                deltaCoeff      1;
+            }
+
+            maxDeltaRatio   1.1;
+        }
+
+        Aplus           26;
+        Cdelta          0.158;
+    }
+
+    smoothCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        maxDeltaRatio   1.1;
+    }
+
+  
+} 
+
+
+// compressible kEqn  // unstable
+/*
+LES
+{
+    LESModel        kEqn;
+
+    turbulence      on;
+
+    printCoeffs     on;
+
+    delta           cubeRootVol;
+
+    cubeRootVolCoeffs
+    {
+        deltaCoeff      1;
+    }
+
+    PrandtlCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        smoothCoeffs
+        {
+            delta           cubeRootVol;
+            cubeRootVolCoeffs
+            {
+                deltaCoeff      1;
+            }
+
+            maxDeltaRatio   1.1;
+        }
+
+        Cdelta          0.158;
+    }
+
+    vanDriestCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        smoothCoeffs
+        {
+            delta           cubeRootVol;
+            cubeRootVolCoeffs
+            {
+                deltaCoeff      1;
+            }
+
+            maxDeltaRatio   1.1;
+        }
+
+        Aplus           26;
+        Cdelta          0.158;
+    }
+
+    smoothCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        maxDeltaRatio   1.1;
+    }
+}
+*/
+
+// incompressible
+/*
+LES
+{
+    LESModel        homogeneousDynSmagorinsky;
+
+
+    homogeneousDynSmagorinskyCoeffs
+    {
+    filter simple;
+    ce 1.05;
+    }
+
+
+    SmagorinskyCoeffs
+    {
+	ck              0.07;
+	ce              1.05;
+    }
+
+
+    turbulence      on;
+
+    printCoeffs     on;
+
+    // delta           vanDriest;  // for fine mesh
+    // delta cubeRootVol; 
+
+    delta smooth;  // to increase stability with a coarse mesh, friction velocity can become underpredicted
+
+    smoothCoeffs
+    {
+	    delta cubeRootVol;
+	    maxDeltaRatio 1.1;
+	    cubeRootVolCoeffs
+	    {
+		    deltaCoeff 1;
+	    }
+    }
+
+    vanDriestCoeffs
+    {
+	delta           cubeRootVol;
+	Aplus           26;
+	Cdelta          0.158;
+	
+	cubeRootVolCoeffs
+	{
+	    deltaCoeff      1;
+	}
+	
+	smoothCoeffs
+	{
+	    delta           cubeRootVol;
+	    maxDeltaRatio   1.1;
+	    
+	    cubeRootVolCoeffs
+	    {
+		deltaCoeff      1;
+	    }
+	}
+    }
+
+  
+} 
+*/

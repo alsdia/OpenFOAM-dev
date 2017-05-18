@@ -1,0 +1,81 @@
+[rhel7ald:34586] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_btl_usnic: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34579] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_btl_usnic: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34579] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_mtl_ofi: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34586] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_mtl_ofi: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34582] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_btl_usnic: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34576] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_btl_usnic: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34576] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_mtl_ofi: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+[rhel7ald:34582] mca: base: component_find: unable to open /usr/lib64/openmpi/lib/openmpi/mca_mtl_ofi: libnl-3.so.200: cannot open shared object file: No such file or directory (ignored)
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus-overset                          |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : plus-overset
+Exec   : overPimpleDyMFoam -parallel
+Date   : May 04 2017
+Time   : 09:23:25
+Host   : "rhel7ald"
+PID    : 34576
+Case   : /home/alseny/edylab/SHIMIZU-overset-grid/CASES/shimizu_iceWings_overset3D_Case-PARALLEL-test3/background_overset
+nProcs : 4
+Slaves : 
+3
+(
+"rhel7ald.34579"
+"rhel7ald.34582"
+"rhel7ald.34586"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Selecting dynamicFvMesh dynamicOversetFvMesh
+Selecting motion solver: multiSolidBodyMotionSolver
+Selecting solid-body motion function oscillatingRotatingMotion
+Applying solid body motion oscillatingRotatingMotion to 5332 points of cellZone movingZone
+
+PIMPLE: Operating solver in PISO mode
+
+Reading field p
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Creating cellMask field to block out hole cells
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:0  voxels:(29 29 29) bb:(-11.750006 -6.2600056 -0.09500559) (-6.7499944 -3.7599944 -0.04499441)
+    zone:1 nCells:105345  voxels:(29 29 29) bb:(-0.89000244 -0.76000244 0.0049975582) (0.51000244 1.2400024 0.055002442)
+--> FOAM Warning : 
+    From function bool Foam::oversetPolyPatch::master() const
+    in file oversetPolyPatch/oversetPolyPatch.C at line 149
+    The master overset patch is not the first patch. Generally the first patch should be an overset patch to guarantee consistent operation.
+[0] 
+[0] 
+[0] --> FOAM FATAL ERROR: 
+[0] Problem:0()
+[0] 
+[0]     From function virtual void Foam::cellCellStencils::inverseDistance::createStencil(const Foam::globalIndex&)
+[0]     in file cellCellStencil/inverseDistance/inverseDistanceCellCellStencil.C at line 1042.
+[0] 
+FOAM parallel run aborting
+[0] 
+[0] #0  Foam::error::printStack(Foam::Ostream&) at ??:?
+[0] #1  Foam::error::abort()--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 34582 on node rhel7ald exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------

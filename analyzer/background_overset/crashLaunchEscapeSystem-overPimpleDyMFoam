@@ -1,0 +1,44 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+# if the checkMesh was not successfull the program exit.
+# the option -o is used to make grep output only the match and not the location
+# to be launched in the directory where the case create the log files
+
+# il file presente e' settato per overPimpleDyMFoam 
+# effettua una sostituzione del nome del solver prima del lancio se intendi lanciarlo con un solver diverso.
+
+while [ 1 ]
+do
+# metti tra le "" delle parole all'inizio del messaggio di MPI_ABORT e che ti 
+# ha fatto frozenare il computer.
+result1=$(fgrep "with errorcode 1." log.overPimpleDyMFoam)
+result2=$(grep -c "?" log.overPimpleDyMFoam)
+result3=$(grep -c "ERROR" log.overPimpleDyMFoam)
+#result3=$(grep -ci "ERROR" log.overPimpleDyMFoam)
+# dobiamo mettere uno spazio altrimenti anche il messaggio "time step continuity errors" bloccherebbe il solver
+result4=$(grep -c "error::" log.overPimpleDyMFoam)
+if [ "$result1" == 'with errorcode 1.' ] || [ $result2 -ge 1 ] || [ $result3 -ge 1 ] || [ $result4 -ge 1 ];
+then
+  ################ METTI QUI IL NOME DEL SOLVER DA KILLARE
+  killall overPimpleDyMFoam
+  echo "It was gonna froze your machine. Program terminated. Yours Dragster" 
+  echo " "
+  # con la seguente riga continua a monitorare ma se lanci un nuovo caso con overPimpleDyMFoam non ti da terminated message
+  mv log.overPimpleDyMFoam zzoldLogCrashed-FROZE-avoidance
+  
+  # ricreiamo il file log.overPimpleDyMFoam vuoto giusto per evitare il messagio line 14: [: -ge: unary operator expected che viene generato da $result2 -ge 1  quando il log.overPimpleDyMFoam non e' presente
+  # o alternativamente possiamo far uscire il programma
+  touch log.overPimpleDyMFoam
+  echo "questo e' solo un dummy file per tenere runnato lo script, per il messaggio del crash vedi zzoldLogCrashed-FROZE-avoidance" >> log.overPimpleDyMFoam
+  #exit
+else
+  echo "CRUISING. SAFETY SYSTEM ON. NAVIGATOR SOUNDTRACK >> Yours, Dragster" 
+fi
+
+
+done
+
+#NOTE
+## il solver dev'essere lanciato con il comando :
+# mpirun -np $nProc overPimpleDyMFoam -parallel 2>&1 | tee log.overPimpleDyMFoam

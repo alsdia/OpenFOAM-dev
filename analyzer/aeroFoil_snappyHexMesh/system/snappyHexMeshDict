@@ -1,0 +1,343 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version	2.4;
+    format      ascii;
+    class       dictionary;
+    object	snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+castellatedMesh	 true;
+snap	 true;
+addLayers	 true;
+
+
+geometry
+{
+	geom.stl
+	{
+		type triSurfaceMesh;
+		name	geom;
+		regions
+		{
+			rearUp
+			{
+				name	rearUp;
+			}
+			rearDown
+			{
+				name	rearDown;
+			}
+			frontUp
+			{
+				name	frontUp;
+			}
+			frontDown
+			{
+				name	frontDown;
+			}
+		}
+	}
+
+
+	cylinder.stl
+	{
+		type triSurfaceMesh;
+		name cylinder	;
+		regions
+		{
+			free1
+			{
+				name	free1;
+			}
+			symFront_1
+			{
+				name	symFront_1;
+			}
+			symBack_1
+			{
+				name	symBack_1;
+			}
+		}
+	}
+
+
+
+
+
+
+
+/*    
+    refinementBox
+    {
+        type searchableBox;
+        min (-0.3 -0.3 -0.05);
+        max ( 0.3  0.3  0.05);
+    }    
+*/    
+
+};
+
+castellatedMeshControls
+{
+    // Refinement parameters
+    maxLocalCells 200000000;  // Max number of cells per processor during refinement
+
+	// Overall cell limit during refinement (i.e. before removal)
+    maxGlobalCells 300000000; 
+
+	// If > number of cells to be refined, surface refinement stops
+    minRefinementCells 20; 
+
+	// Allow a certain level of imbalance during refining
+	maxLoadUnbalance 0.10;
+	
+	// Number of buffer layers of cells between different levels of refinement
+    nCellsBetweenLevels 4;  
+	
+    // free-standing zone faces. Not used if there are no faceZones.
+	allowFreeStandingZoneFaces true;
+	
+	//- Optional increment (on top of max level) in small gaps
+    //gapLevelIncrement 2;
+	resolveFeatureAngle	 30;
+	features
+	(
+		{
+			file "geom.eMesh" ;
+			level 3 ;
+		}
+		{
+			file "cylinder.eMesh" ;
+			level 3 ;
+		}		
+		
+	);
+
+	refinementSurfaces
+	{
+		geom
+		{
+			level (0 0);
+			regions
+			{
+				rearUp
+				{
+					level (2 3);
+					status 1 ;
+				}
+				rearDown    
+				{
+					level (2 3);
+					status 1 ;
+				}
+				frontUp      
+				{
+					level (2 3);
+					status 1 ;
+				}
+				frontDown
+				{
+					level (2 3);
+					status 1 ;
+				}
+			}
+		}
+    
+               cylinder
+                {
+                       level (0 0);
+			regions
+			{
+	                        free1
+				{
+					level (1  1);
+					status 1 ;
+                                }
+
+                        }
+                    
+                }
+               
+
+	}
+
+	refinementRegions
+	{
+        /*
+        refinementBox
+        {
+            mode inside;
+            levels ((1E15 2));
+        }
+        */ 		
+	}
+
+	locationInMesh ( 0 0 0 ) ; //( 0 0 0 ) ;
+}
+
+snapControls
+{
+	// Number of patch smoothing iterations before finding correspondence to surface
+    nSmoothPatch 3;   
+
+	// Ratio of distance for points to be attracted by surface feature 
+	//point or edge, to local maximum edge length
+    tolerance 4.0;     
+	
+    // Number of mesh displacement relaxation iterations.
+    nSolveIter 50;     
+
+    // Maximum number of snapping relaxation iterations. 
+    nRelaxIter 5;      
+ 
+	nFeatureSnapIter    10 ;
+	
+	//True of false to enable implicit method for feature snap process. (default=false)
+	implicitFeatureSnap false;
+
+	//True of false to enable explicit method for feature snap process (default=true)
+	explicitFeatureSnap true;
+
+	//Just for explicit method, “detect features between multiple surfaces”
+	multiRegionFeatureSnap true; 
+	
+	//Enables snapping to opposite near surfaces 
+	detectNearSurfacesSnap true;
+}
+
+addLayersControls
+{
+	layers
+	{		
+        "(rearUp|rearDown|frontUp|frontDown).*"
+        {
+            nSurfaceLayers 1;
+        }		
+	}
+	relativeSizes    true ;
+	expansionRatio    1.2 ;
+	finalLayerRatio    0.20736 ;
+	finalLayerThickness    0.20736 ;
+	// Minimum thickness of cell layer, either relative or absolute 
+    minThickness 0.001;           
+
+    // Number of layers of connected faces that are not grown if points get not
+    // extruded; helps convergence of layer addition close to features
+    nGrow 0;                     
+
+	// Angle above which surface is not extruded
+    featureAngle 85;              
+
+	// At non-patched sides allow mesh to slip if extrusion direction makes angle larger than slipFeatureAngle.
+    slipFeatureAngle 30;
+	
+    // Maximum number of snapping relaxation iterations.
+    nRelaxIter 5;                
+
+    // Number of smoothing iterations of surface normals
+    nSmoothSurfaceNormals 10;    
+
+    // Number of smoothing iterations of interior mesh movement direction
+    nSmoothNormals 3;         
+
+	// Optional: limit the number of steps walking away from the surface.
+    nMedialAxisIter 10;
+
+    // Smooth layer thickness over surface patches
+    nSmoothThickness 10;        
+
+    // Stop layer growth on highly warped cells
+    maxFaceThicknessRatio 0.2;      
+
+    // Reduce layer growth where ratio thickness to medial distance is large
+    maxThicknessToMedialRatio 0.3;  
+
+    // Angle used to pick up medial axis points
+    minMedianAxisAngle 90;       
+
+    // Create buffer region for new layer terminations
+    nBufferCellsNoExtrude 0;      
+
+	// Overall max number of layer addition iterations. 
+    nLayerIter 50;   
+	
+	// Max number of iterations after which the controls in the relaxed sub
+    nRelaxedIter 30;               
+                                  
+	//grownUpPatches (  );
+
+	}
+
+meshQualityControls
+{
+    //Maximum non-orthogonality allowed. Set to 180 to disable.
+    maxNonOrtho 65;             
+
+    //Max skewness allowed. <0 to disable.
+    maxBoundarySkewness 20;    
+	
+	// Max internal face skewness allowed; < 0 disables
+    maxInternalSkewness 4;      
+
+    //Max concaveness allowed. Is angle (in degrees) below which concavity
+    // 0 is straight face, <0 would be convex face, 180 to disable.
+    maxConcave 80;                
+
+    // Ratio of minimum projected area to actual area; -1 disables
+    minFlatness 0.5;          
+
+	// Minimum pyramid volume; large negative number, e.g.-1e30 disables
+    minVol 1e-13;                 
+
+    //- Minimum quality of the tet formed by the face-centre KSG Added
+    //  <0 = inside out tet,   0 = flat tet,      1 = regular tet
+    minTetQuality 1e-16;
+	
+    //- Minimum face area. Set to <0 to disable.
+    minArea 1e-13;                   
+
+	// Minimum normalised cell determinant; < 0 illegal cell
+    minTwist 0.05;                
+
+	// Minimum normalised cell determinant;
+    minDeterminant 0.01;        
+
+    // minFaceWeight (0 -> 0.5)
+    minFaceWeight 0.02;           
+
+    //	minVolRatio (0 -> 1)
+    minVolRatio 0.01;           
+
+	// Must be >0 for Fluent compatibility  Default = -1
+    minTriangleTwist -1;         
+
+	// Number of error distribution iterations
+    nSmoothScale 4;               
+
+	// Amount to scale back displacement at error points
+    errorReduction 0.75;          
+	
+    relaxed
+    {
+		//Maximum non-orthogonality allowed 
+		maxNonOrtho 75;
+		maxInternalSkewness 8;
+    }
+}
+// Flags for optional output
+debug 0;
+
+// Merge tolerance. 
+mergeTolerance 1E-8;
+
+

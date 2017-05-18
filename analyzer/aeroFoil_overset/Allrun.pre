@@ -1,0 +1,15 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+
+# Make a 2D mesh by extruding a patch and solve to steady state.
+#runApplication extrudeMesh
+# let the 3D mesh as it is
+#cp -r ../aeroFoil_snappyHexMesh/constant/polyMesh/* constant/polyMesh/
+runApplication extrudeMesh
+runApplication createPatch -overwrite
+
+

@@ -1,0 +1,124 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    cellDisplacement
+    {
+        solver          PCG;
+        preconditioner  DIC;
+
+        tolerance       1e-06;
+        relTol          0;
+        maxIter         100;
+    }
+
+
+    p
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-11;
+        relTol          0;
+        maxIter         1000;
+    }
+
+    pFinal
+    {
+        $p;
+    }
+
+    pcorr
+    {
+        $p;
+        solver          PCG;
+        preconditioner  DIC;
+    }
+
+    pcorrFinal
+    {
+        $pcorr;
+        relTol          0;
+    }
+
+
+    "(U|k|epsilon)"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-11;
+        relTol          0;
+    }
+
+    "(U|k|epsilon)Final"
+    {
+        $U;
+        tolerance       1e-11;
+        relTol          0;
+    }
+}
+
+
+PIMPLE
+{
+    momentumPredictor      yes;
+    correctPhi              yes;
+    nOuterCorrectors        1;
+    nCorrectors             2;
+    nNonOrthogonalCorrectors 0;
+
+    massFluxInterpolation no;
+    ddtCorr             false;
+
+   // pRefPoint           (0.0001 0.0001 0.001);
+   // pRefValue           0.0;
+}
+
+
+relaxationFactors
+{
+    default         0.8;
+    U               0.9;
+    rho             0.5;
+    p               0.9;
+    h               0.9;
+    e               0.9;
+
+    pFinal          1;
+    UFinal          1;
+    eFinal          1;
+    nuTildaFinal    1;
+    kFinal          1;
+    omegaFinal      1;
+    hFinal          1;
+    epsilonFinal    1;
+    rhoFinal        1;
+}
+
+
+relaxationFactors_1
+{
+   fields
+   {
+   }
+   equations
+   {
+       ".*"              1;
+   }
+}
+
+// ************************************************************************* //

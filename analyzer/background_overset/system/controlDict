@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs            ("liboverset.so");
+
+application     overPimpleDyMFoam;
+
+//startTime       latestTime;
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+//endTime     2.945;  // reboot workstation
+endTime     33.472;  // 10 full rotations
+
+deltaT          1e-05;
+
+writeControl    runTime;
+
+writeInterval   0.01;
+
+purgeWrite      3;
+
+writeFormat     ascii;
+
+writePrecision  8;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   8;
+
+runTimeModifiable true;
+
+adjustTimeStep  no;
+
+maxCo           1;
+
+maxDeltaT       1;
+
+functions
+{
+	forceCoeffs
+	{
+		type        forceCoeffs;
+
+		functionObjectLibs ( "libforces.so" );
+
+		outputControl   timeStep;
+		timeInterval    100;
+
+		log         yes;
+
+		patches     ( walls );
+		rho         rhoInf;   // Indicates incompressible
+		rhoInf      1.225;    // Redundant for incompressible
+		liftDir     (0 1 0);
+		dragDir     (1 0 0);
+		CofR        (0 0 0);  // Center of rotation of the oscillating mesh
+		pitchAxis   (0 0 1);  // periodic rotation around the z axis
+		magUInf     10;
+		lRef        0.247;    //  [from 「風洞実験による着氷雪送電線の定常および非定常空気力特性に関する研究」 table 1 pag 246 B(mm) = 247
+        
+		//Aref        0.009386; // 0.247 * 0.038 = [from 「風洞実験による着氷雪送電線の定常および非定常空気力特性に関する研究」 fig2(a) pag 246 38mm]
+        // from 1.08sec changed to 
+              Aref        0.0038; // = 0.1 * 0.038 = [mesh thickness : 0.1m] Note we use 0.1 instead of the original 0.247 * 0.038 = [from 「風洞実験による着氷雪送電線の定常および非定常空気力特性に関する研究」 fig2(a) pag 246 38mm] since our mesh is much thinner.
+        // since coefficient where referring to a to bigger reference area and therefore coming up too small.
+	}
+
+       probes
+    {
+        type            probes;
+        functionObjectLibs ("libsampling.so");
+        enabled         true;
+        outputControl   timeStep;
+        outputInterval  1;
+        probeLocations
+        ( (0.0 0.0 0.03 ));
+        fields
+        (p  U);
+    }    
+	
+}
+
+
+
+// ************************************************************************* //
