@@ -57,9 +57,9 @@ snGradSchemes
 
 oversetInterpolation
 {
-   //method          cellVolumeWeight; //inverseDistance;
-  method          inverseDistance;
-//   method          trackingInverseDistance;
+//    method          cellVolumeWeight; //inverseDistance;
+    method          inverseDistance;
+//    method          trackingInverseDistance;
 }
 
 fluxRequired

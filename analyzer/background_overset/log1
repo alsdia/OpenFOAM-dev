@@ -1,0 +1,628 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus-overset                          |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : plus-overset-88e0ac9b3381
+Exec   : overPimpleDyMFoam -parallel
+Date   : May 15 2017
+Time   : 13:29:07
+Host   : "buzz"
+PID    : 3528
+Case   : /home/buzz2/pawan/Projects/OverSet/2017/Testcase/Alseny/shimizu_iceWings_overset3D_Case-PARALLEL/background_overset
+nProcs : 12
+Slaves : 
+11
+(
+"buzz.3529"
+"buzz.3530"
+"buzz.3531"
+"buzz.3532"
+"buzz.3533"
+"buzz.3534"
+"buzz.3535"
+"buzz.3536"
+"buzz.3537"
+"buzz.3538"
+"buzz.3539"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Selecting dynamicFvMesh dynamicOversetFvMesh
+Selecting motion solver: multiSolidBodyMotionSolver
+Selecting solid-body motion function oscillatingRotatingMotion
+Applying solid body motion oscillatingRotatingMotion to 5332 points of cellZone movingZone
+
+PIMPLE: Operating solver in PISO mode
+
+Reading field p
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Creating cellMask field to block out hole cells
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+--> FOAM Warning : 
+    From function bool Foam::oversetPolyPatch::master() const
+    in file oversetPolyPatch/oversetPolyPatch.C at line 149
+    The master overset patch is not the first patch. Generally the first patch should be an overset patch to guarantee consistent operation.
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+Creating interpolatedCells field 
+
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type LES
+Selecting LES turbulence model Smagorinsky
+Selecting LES delta type smooth
+Selecting LES delta type cubeRootVol
+SmagorinskyCoeffs
+{
+    ck              0.07;
+    ce              1.05;
+    Ce              1.048;
+    Ck              0.094;
+}
+
+Reading/calculating face velocity Uf
+
+No MRF models present
+
+No finite volume options present
+
+Courant Number mean: 0.0051554783 max: 0.052566414
+
+Starting time loop
+
+--> FOAM Warning : 
+    From function void Foam::timeControl::read(const Foam::dictionary&)
+    in file db/functionObjects/timeControl/timeControl.C at line 108
+    Reading "/home/buzz2/pawan/Projects/OverSet/2017/Testcase/Alseny/shimizu_iceWings_overset3D_Case-PARALLEL/background_overset/system/controlDict.functions.forceCoeffs" from line 62 to line 83
+    Using deprecated 'outputControl'
+    Please use 'writeControl' with 'writeInterval'
+forces forceCoeffs:
+    Not including porosity effects
+
+forceCoeffs forceCoeffs:
+    Not including porosity effects
+
+--> FOAM Warning : 
+    From function void Foam::timeControl::read(const Foam::dictionary&)
+    in file db/functionObjects/timeControl/timeControl.C at line 108
+    Reading "/home/buzz2/pawan/Projects/OverSet/2017/Testcase/Alseny/shimizu_iceWings_overset3D_Case-PARALLEL/background_overset/system/controlDict.functions.probes" from line 89 to line 97
+    Using deprecated 'outputControl'
+    Please use 'writeControl' with 'writeInterval'
+Courant Number mean: 0.0051554783 max: 0.052566414
+Time = 1e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 7.9818734e-12, No Iterations 111
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.97799417, Final residual = 1.0139694e-10, No Iterations 1000
+smoothSolver:  Solving for Uy, Initial residual = 1, Final residual = 6.179065e-12, No Iterations 6
+smoothSolver:  Solving for Uz, Initial residual = 1, Final residual = 5.3893273e-12, No Iterations 7
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 1, Final residual = 7.263761e-12, No Iterations 444
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 8.8980537e-18, global = -4.3450129e-18, cumulative = -4.3450129e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.056419209, Final residual = 9.8754769e-12, No Iterations 392
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.3534653e-16, global = 3.8204756e-17, cumulative = 3.3859743e-17
+ExecutionTime = 3.21 s  ClockTime = 3 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -16.02559	(pressure: -16.009347	viscous: -0.016243282)
+        Cd       : 254.07736	(pressure: 253.56797	viscous: 0.50938951)
+        Cl       : 1.6252383	(pressure: 1.6247124	viscous: 0.00052589442)
+        Cl(f)    : -15.212971
+        Cl(r)    : 16.838209
+
+Courant Number mean: 0.005162564 max: 0.079135496
+Time = 2e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 9.2828113e-12, No Iterations 550
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.25537591, Final residual = 7.325718e-12, No Iterations 6
+smoothSolver:  Solving for Uy, Initial residual = 0.33307884, Final residual = 2.2870353e-12, No Iterations 6
+smoothSolver:  Solving for Uz, Initial residual = 0.3248306, Final residual = 2.572356e-12, No Iterations 6
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.06993029, Final residual = 6.8008758e-12, No Iterations 392
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.6120909e-16, global = -9.8281283e-19, cumulative = 3.287693e-17
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.17200183, Final residual = 9.0775123e-12, No Iterations 434
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 3.7680437e-17, global = 1.6625014e-18, cumulative = 3.4539432e-17
+ExecutionTime = 5.01 s  ClockTime = 5 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.97818435	(pressure: -0.96352616	viscous: -0.014658193)
+        Cd       : 21.160194	(pressure: 20.68744	viscous: 0.47275367)
+        Cl       : 0.15264188	(pressure: 0.15231443	viscous: 0.00032745457)
+        Cl(f)    : -0.90186341
+        Cl(r)    : 1.0545053
+
+Courant Number mean: 0.0051626214 max: 0.081377582
+Time = 3e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.995396e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.021347293, Final residual = 9.6469041e-12, No Iterations 6
+smoothSolver:  Solving for Uy, Initial residual = 0.029630297, Final residual = 5.3735036e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.1649817, Final residual = 2.0298842e-12, No Iterations 6
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.26495, Final residual = 7.4542683e-12, No Iterations 369
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.7185001e-17, global = -5.0413068e-20, cumulative = 3.4489019e-17
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.039545291, Final residual = 8.9039324e-12, No Iterations 482
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.7432696e-17, global = -7.1438429e-18, cumulative = 2.7345176e-17
+ExecutionTime = 6.84 s  ClockTime = 7 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.17616488	(pressure: -0.16259075	viscous: -0.01357413)
+        Cd       : 3.8163519	(pressure: 3.3691266	viscous: 0.44722529)
+        Cl       : 0.053836685	(pressure: 0.053555475	viscous: 0.00028120998)
+        Cl(f)    : -0.14924654
+        Cl(r)    : 0.20308322
+
+Courant Number mean: 0.0051627008 max: 0.081225568
+Time = 4e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.8737766e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.01625149, Final residual = 1.2526185e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.014602968, Final residual = 3.5139531e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.095997509, Final residual = 3.9884667e-12, No Iterations 5
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.059106494, Final residual = 4.1483511e-12, No Iterations 372
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 2.0976519e-17, global = 1.4364283e-19, cumulative = 2.7488819e-17
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.0060488484, Final residual = 8.0739845e-12, No Iterations 390
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 3.4278228e-17, global = -1.8096031e-17, cumulative = 9.3927875e-18
+ExecutionTime = 8.51 s  ClockTime = 8 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.14286242	(pressure: -0.12999351	viscous: -0.012868905)
+        Cd       : 2.6387339	(pressure: 2.2085671	viscous: 0.43016674)
+        Cl       : 0.031566619	(pressure: 0.031310846	viscous: 0.00025577289)
+        Cl(f)    : -0.12707911
+        Cl(r)    : 0.15864573
+
+Courant Number mean: 0.0051627059 max: 0.080876467
+Time = 5e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.9368341e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0065247015, Final residual = 1.2741339e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0088645734, Final residual = 3.2544471e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.067778973, Final residual = 3.0370662e-12, No Iterations 5
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.10339255, Final residual = 5.6327701e-12, No Iterations 422
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 9.5251284e-18, global = -2.0300996e-20, cumulative = 9.3724865e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.0040059991, Final residual = 2.9503303e-12, No Iterations 345
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 9.8237386e-18, global = -3.5301113e-18, cumulative = 5.8423752e-18
+ExecutionTime = 10.21 s  ClockTime = 10 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.11633626	(pressure: -0.1039731	viscous: -0.012363157)
+        Cd       : 2.2204951	(pressure: 1.8030551	viscous: 0.41744007)
+        Cl       : 0.017421749	(pressure: 0.017155752	viscous: 0.00026599685)
+        Cl(f)    : -0.10762538
+        Cl(r)    : 0.12504713
+
+Courant Number mean: 0.0051627229 max: 0.08046836
+Time = 6e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.7741894e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0067597125, Final residual = 1.3026407e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0067401054, Final residual = 3.2254304e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.053940362, Final residual = 1.4114623e-12, No Iterations 5
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.048955702, Final residual = 9.6243006e-12, No Iterations 375
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 2.2268384e-17, global = -2.0791847e-18, cumulative = 3.7631905e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.0019742062, Final residual = 6.2873236e-12, No Iterations 354
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 2.3929383e-17, global = 3.327926e-20, cumulative = 3.7964698e-18
+ExecutionTime = 11.87 s  ClockTime = 12 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.10108054	(pressure: -0.089097393	viscous: -0.01198315)
+        Cd       : 1.9935394	(pressure: 1.5862298	viscous: 0.4073096)
+        Cl       : 0.010755245	(pressure: 0.01047525	viscous: 0.00027999534)
+        Cl(f)    : -0.09570292
+        Cl(r)    : 0.10645817
+
+Courant Number mean: 0.0051627249 max: 0.080023359
+Time = 7e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 9.0650033e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0048569268, Final residual = 1.3327715e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0058442506, Final residual = 3.2335585e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.044642571, Final residual = 8.446627e-13, No Iterations 5
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.052863893, Final residual = 7.08697e-12, No Iterations 396
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.1186899e-17, global = -1.7706955e-18, cumulative = 2.0257743e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.0011291865, Final residual = 1.3956159e-12, No Iterations 397
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 6.888517e-18, global = -1.1292629e-19, cumulative = 1.912848e-18
+ExecutionTime = 13.56 s  ClockTime = 14 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.093826855	(pressure: -0.08215178	viscous: -0.011675075)
+        Cd       : 1.8626867	(pressure: 1.4637794	viscous: 0.39890727)
+        Cl       : 0.0035421899	(pressure: 0.0032456692	viscous: 0.00029652069)
+        Cl(f)    : -0.09205576
+        Cl(r)    : 0.09559795
+
+Courant Number mean: 0.0051627134 max: 0.079559452
+Time = 8e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.25000071 0.0049992911) (0.25000071 0.25000071 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.9109131e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0047910364, Final residual = 1.3568282e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.005412958, Final residual = 3.2541219e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.038374917, Final residual = 7.9251575e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.044154274, Final residual = 4.4463376e-12, No Iterations 387
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 6.4052321e-18, global = 2.5002503e-18, cumulative = 4.4130983e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00075897553, Final residual = 3.4313096e-12, No Iterations 382
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.8213286e-17, global = 2.3601829e-19, cumulative = 4.6491166e-18
+ExecutionTime = 15.2 s  ClockTime = 15 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.088161117	(pressure: -0.076744684	viscous: -0.011416433)
+        Cd       : 1.7711804	(pressure: 1.3794207	viscous: 0.39175975)
+        Cl       : 0.0017094477	(pressure: 0.0013944659	viscous: 0.00031498183)
+        Cl(f)    : -0.087306393
+        Cl(r)    : 0.08901584
+
+Courant Number mean: 0.00516269 max: 0.079087902
+Time = 9e-05
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.2500007 0.0049992911) (0.25000071 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.8029128e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0058124677, Final residual = 1.3769821e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0051324239, Final residual = 3.2813185e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.034810619, Final residual = 7.348604e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.024871905, Final residual = 9.4989407e-12, No Iterations 363
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.9377722e-17, global = 7.7192199e-18, cumulative = 1.2368337e-17
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00058258383, Final residual = 9.8728675e-12, No Iterations 337
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 5.8790068e-17, global = -1.3862806e-17, cumulative = -1.4944696e-18
+ExecutionTime = 16.82 s  ClockTime = 17 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.085343128	(pressure: -0.074137499	viscous: -0.011205629)
+        Cd       : 1.7015886	(pressure: 1.3160185	viscous: 0.38557005)
+        Cl       : 0.0010269965	(pressure: 0.00068125625	viscous: 0.00034574021)
+        Cl(f)    : -0.084829629
+        Cl(r)    : 0.085856626
+
+Courant Number mean: 0.0051626588 max: 0.078618677
+Time = 0.0001
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.2500007 0.0049992911) (0.25000071 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.7204331e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0064801983, Final residual = 1.3940044e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0049147111, Final residual = 3.306004e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.03254529, Final residual = 6.3064377e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.01727584, Final residual = 5.8395589e-12, No Iterations 361
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.4260134e-17, global = -5.7012839e-18, cumulative = -7.1957535e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00048439995, Final residual = 3.8096016e-12, No Iterations 391
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 2.1909803e-17, global = 7.2372153e-19, cumulative = -6.472032e-18
+ExecutionTime = 18.5 s  ClockTime = 19 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.081025327	(pressure: -0.070004676	viscous: -0.011020651)
+        Cd       : 1.6451244	(pressure: 1.2649983	viscous: 0.3801261)
+        Cl       : 0.00152062	(pressure: 0.0011475168	viscous: 0.00037310325)
+        Cl(f)    : -0.080265017
+        Cl(r)    : 0.081785637
+
+Courant Number mean: 0.0051626233 max: 0.07815698
+Time = 0.00011
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.25000071 -0.2500007 0.0049992911) (0.25000071 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.8789731e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0068017903, Final residual = 1.4093079e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.004705041, Final residual = 3.3253851e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.031308573, Final residual = 6.2693343e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.013565904, Final residual = 3.423084e-12, No Iterations 371
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 8.8504673e-18, global = -1.2788624e-18, cumulative = -7.7508944e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00042790952, Final residual = 9.3741005e-12, No Iterations 348
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 5.9546889e-17, global = -7.4266501e-18, cumulative = -1.5177544e-17
+ExecutionTime = 20.11 s  ClockTime = 20 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.078200354	(pressure: -0.067343911	viscous: -0.010856443)
+        Cd       : 1.5967676	(pressure: 1.2214881	viscous: 0.37527953)
+        Cl       : 0.0019032608	(pressure: 0.0015061684	viscous: 0.00039709233)
+        Cl(f)    : -0.077248724
+        Cl(r)    : 0.079151984
+
+Courant Number mean: 0.005162586 max: 0.077705587
+Time = 0.00012
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.2500007 -0.2500007 0.0049992911) (0.2500007 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 8.9722305e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.0068613874, Final residual = 1.4227191e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0044953223, Final residual = 3.3376678e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.030428317, Final residual = 6.5950301e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.011508056, Final residual = 5.4289432e-12, No Iterations 389
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.4506877e-17, global = 3.6452482e-18, cumulative = -1.1532296e-17
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00039150544, Final residual = 6.3782285e-12, No Iterations 379
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 4.0002774e-17, global = -6.086163e-19, cumulative = -1.2140913e-17
+ExecutionTime = 21.74 s  ClockTime = 22 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.075783603	(pressure: -0.065080399	viscous: -0.010703203)
+        Cd       : 1.5543232	(pressure: 1.1834012	viscous: 0.37092197)
+        Cl       : 0.0044806816	(pressure: 0.0040512472	viscous: 0.00042943432)
+        Cl(f)    : -0.073543262
+        Cl(r)    : 0.078023943
+
+Courant Number mean: 0.0051625488 max: 0.077264288
+Time = 0.00013
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.2500007 -0.2500007 0.0049992911) (0.2500007 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 9.2100802e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.006711615, Final residual = 1.4348312e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0042770653, Final residual = 3.3437759e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.029779076, Final residual = 6.69486e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.010245113, Final residual = 4.867269e-12, No Iterations 358
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 1.2706708e-17, global = 2.1609547e-18, cumulative = -9.9799579e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00036625284, Final residual = 9.4477896e-12, No Iterations 345
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 5.7410294e-17, global = 9.1757458e-18, cumulative = -8.0421213e-19
+ExecutionTime = 23.34 s  ClockTime = 24 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.073191624	(pressure: -0.062631634	viscous: -0.01055999)
+        Cd       : 1.5162675	(pressure: 1.1492919	viscous: 0.3669756)
+        Cl       : 0.0070476118	(pressure: 0.0065770852	viscous: 0.0004705266)
+        Cl(f)    : -0.069667818
+        Cl(r)    : 0.07671543
+
+Courant Number mean: 0.0051625127 max: 0.076832683
+Time = 0.00014
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.2500007 -0.2500007 0.0049992911) (0.2500007 0.2500007 0.055000709)
+Overset analysis : nCells : 105345
+    calculated   : 103965
+    interpolated : 768 (interpolated from local:0  mixed local/remote:0  remote:768)
+    hole         : 612
+
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 9.2911589e-12, No Iterations 552
+PIMPLE: iteration 1
+Switching to extended addressing with nFaces:23094
+smoothSolver:  Solving for Ux, Initial residual = 0.006494712, Final residual = 1.4451769e-12, No Iterations 7
+smoothSolver:  Solving for Uy, Initial residual = 0.0040773109, Final residual = 3.3431303e-12, No Iterations 5
+smoothSolver:  Solving for Uz, Initial residual = 0.029322891, Final residual = 7.3723594e-12, No Iterations 4
+Switching to base addressing with nFaces:23094
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.0093254826, Final residual = 8.3866418e-12, No Iterations 390
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 2.1210824e-17, global = 4.1222928e-18, cumulative = 3.3180806e-18
+Switching to extended addressing with nFaces:23094
+DILUPBiCGStab:  Solving for p, Initial residual = 0.00034802047, Final residual = 9.9526407e-12, No Iterations 356
+Switching to base addressing with nFaces:23094
+time step continuity errors : sum local = 6.2003944e-17, global = -5.4939833e-18, cumulative = -2.1759027e-18
+ExecutionTime = 24.96 s  ClockTime = 25 s
+
+forceCoeffs forceCoeffs execute:
+    Coefficients
+        Cm       : -0.07126912	(pressure: -0.060830943	viscous: -0.010438177)
+        Cd       : 1.4825477	(pressure: 1.1191693	viscous: 0.3633784)
+        Cl       : 0.0072932596	(pressure: 0.0068039927	viscous: 0.00048926685)
+        Cl(f)    : -0.06762249
+        Cl(r)    : 0.07491575
+
+Courant Number mean: 0.0051624781 max: 0.076412025
+Time = 0.00015
+
+inverseDistance : detected 2 mesh regions
+    zone:0 nCells:102075  voxels:(20 20 20) bb:(-1.7500013 -1.2600013 0.004998715) (-0.96999871 -0.23999871 0.055001285)
+    zone:1 nCells:3270  voxels:(20 20 20) bb:(-0.2500007 -0.2500007 0.0049992911) (0.2500007 0.2500007 0.055000709)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 3529 on node buzz exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------

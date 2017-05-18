@@ -4,8 +4,11 @@
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 #runApplication  $(getApplication)
-rm -rf 0
-cp -r 0.org 0
 
-rm -rf proc*
+# serial 
 overPimpleDyMFoam 2>&1 | tee log.overPimpleDyMFoam
+
+# parallel
+#rm -rf proc*
+#decomposePar 2>&1 | tee log.decomposePar
+#mpirun -np 12 overPimpleDyMFoam -parallel 2>&1 | tee log.overPimpleDyMFoam

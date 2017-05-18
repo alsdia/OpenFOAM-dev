@@ -16,18 +16,18 @@ FoamFile
     location        "constant";
 }
 
-//simulationType RAS;
+simulationType LES;
 // for OF+
 //simulationType LES;
-simulationType LES;
+//simulationType LES;
 
 // for OF24
 //simulationType LESModel;
 
 RAS
 {
-//    RASModel          kEpsilon;
-    RASModel            realizableKE;
+//    RASModel         kOmegaSST;
+//    RASModel            realizableKE;
 //    RASModel            v2f;
 //    RASModel            SpalartAllmaras;
     turbulence          off; //on;
